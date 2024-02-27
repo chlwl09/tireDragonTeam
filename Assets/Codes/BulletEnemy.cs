@@ -15,5 +15,11 @@ public class BulletEnemy : MonoBehaviour
                 Destroy(gameObject); // ¹ß»çÃ¼ ÆÄ±«
             }
         }
+        if (other.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
     }
+
+
 }

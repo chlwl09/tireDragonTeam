@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2839757755823599864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2839757755823599814}
+  - component: {fileID: 2839757755823599815}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2839757755823599814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839757755823599864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.950785, y: -0.048768908, z: -0.010744041}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2839757755823599815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839757755823599864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbb4dd7e0e2f264fbfb34459b810fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefabs:
+  - {fileID: 6961919466926103989, guid: eb9961ae08744f1439a624769961d523, type: 3}
+  - {fileID: 256258628666526019, guid: f0374ccd5ab22474b9f8d85377b3f61b, type: 3}
+  - {fileID: 3951323445001362172, guid: 712019a66262e274ba03511655dd460c, type: 3}
+  spawnPoints:
+  - {fileID: 5759059762010075902, guid: 370a5b47c648d7947a9e95933c3fc667, type: 3}
+  - {fileID: 8631877061579970590, guid: a1a46ba1eeb56ee4bb38673b428309a2, type: 3}
+  - {fileID: 3660250448477794621, guid: 446ee4c1e9eeb754bbc8297fc154535c, type: 3}
+  - {fileID: 4550129411381036749, guid: 8a51bf9808410ad4ca801f903451f45e, type: 3}
+  - {fileID: 4824215513204396640, guid: 6359eb4e8cb059146932965b4a8b141a, type: 3}
+  - {fileID: 866106014994839990, guid: 982d504d63d7583429e2bd829a66cb43, type: 3}
+  - {fileID: 5561902308782735907, guid: f4bbbba18df31a444a398bed6092637b, type: 3}
+  - {fileID: 1583345811944855650, guid: d5cdb028d9963a447b08a6e225083e7a, type: 3}
+  - {fileID: 1339556172072727210, guid: 7c886621902a5c64b9145207a3c43bde, type: 3}

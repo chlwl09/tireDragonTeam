@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6961919466926103988}
   - component: {fileID: 6961919466926103990}
   - component: {fileID: 963715973168265028}
+  - component: {fileID: -6087001862502536761}
   m_Layer: 0
   m_Name: LineEnemy
   m_TagString: Monster
@@ -98,12 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e8195d8d60f98409bde07c17574a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  player: {fileID: 0}
+  moveSpeed: 5
   health: 5
   projectilePrefab: {fileID: 0}
   projectileSpawnPoint: {fileID: 0}
   fireInterval: 2
+  m1Score: 100
   maxMap: 20
   currentState: 0
 --- !u!61 &963715973168265028
@@ -132,3 +133,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-6087001862502536761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6961919466926103989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a49ba6936c9d578489dbeccdd036a9b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

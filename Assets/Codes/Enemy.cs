@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public static Enemy Instance;
+
     public float moveSpeed = 5f; // 몬스터 이동 속도
-    public Transform player; // 플레이어의 Transform을 저장하기 위한 변수
+     Transform player; // 플레이어의 Transform을 저장하기 위한 변수
     public int health = 3; // 몬스터 생명력
     public GameObject projectilePrefab; // 발사체 프리팹
     public Transform projectileSpawnPoint; // 발사체 생성 위치
     public float fireInterval = 2f; // 발사 간격
+    public  int m1Score = 50;
+    
     private float nextFireTime = 0f; // 다음 발사 시간
-
     public float maxMap = 10f;
 
+
+    private void Awake()
+    {
+    }
     public enum diffEnemy
     {
         LineEnemy,
@@ -23,7 +30,9 @@ public class Enemy : MonoBehaviour
 
     public diffEnemy currentState;
 
-  
+    private void Update()
+    {
+    }
 
     private void FixedUpdate()
     {
@@ -73,6 +82,7 @@ public class Enemy : MonoBehaviour
     }
     void FollowPlayer()
     {
+        player = Player.Instance.transform;
         // 플레이어 방향으로 회전
         Vector2 direction = (player.position - transform.position).normalized;
 
@@ -96,7 +106,9 @@ public class Enemy : MonoBehaviour
         // 생명력이 0 이하면 몬스터를 파괴하거나 다른 처리 수행
         if (health <= 0)
         {
+            OnMonsterDestroyed();
             Destroy(gameObject);
+            
             // 또는 다른 처리를 수행할 수 있습니다.
         }
     }
@@ -117,15 +129,34 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Invoke("DeadPlayer", 1f);
+    }
+    void DeadPlayer(Collider2D other)
+    {
+
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
                 player.TakeDamage(1); // 피해량을 원하는 값으로 설정
-                Destroy(gameObject); // 발사체 파괴
+                Destroy(gameObject);
             }
         }
     }
+    void OnMonsterDestroyed()
+    {
+        // 몬스터 파괴 이벤트를 발생시킴
+        if (MonsterDestroyedEvent != null)
+        {
+            MonsterDestroyedEvent(this, m1Score); // 몬스터 인스턴스와 점수를 파라미터로 전달
+        }
+    }
+
+    // 몬스터 파괴 이벤트를 수신할 델리게이트 및 이벤트
+    public delegate void MonsterDestroyedEventHandler(Enemy monster, int score);
+    public static event MonsterDestroyedEventHandler MonsterDestroyedEvent;
+
+    
 }
 

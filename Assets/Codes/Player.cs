@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
     
     public GameObject BulletPrefabs; // 발사체 프리팹
     public Transform BulletSpawnPoint; // 발사체 생성 위치
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         spriter= GetComponent<SpriteRenderer>();
+        Instance = this;
     }
 
     void Update()

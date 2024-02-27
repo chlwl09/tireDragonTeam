@@ -105,6 +105,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8360190750150356083, guid: 7121f8556e546434094fa04130a48877, type: 3}
   projectileSpawnPoint: {fileID: 5007318453104800755}
   fireInterval: 2
+  m1Score: 200
   maxMap: 20
   currentState: 2
 --- !u!61 &6563875442496581645
