@@ -15,5 +15,7 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject); // 발사체 파괴
             }
         }
+        
+    
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     
-    public GameObject projectilePrefab; // 발사체 프리팹
-    public Transform projectileSpawnPoint; // 발사체 생성 위치
+    public GameObject BulletPrefabs; // 발사체 프리팹
+    public Transform BulletSpawnPoint; // 발사체 생성 위치
 
     public Vector2 inputVec;
     public float MoveSpeed = 1.0f;
@@ -43,9 +43,9 @@ public class Player : MonoBehaviour
     }
     void FireProjectile()
     {  // 발사체를 생성하고 오른쪽으로 발사
-        if (projectilePrefab != null && projectileSpawnPoint != null)
+        if (BulletPrefabs != null && BulletSpawnPoint != null)
         {
-            GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.Euler(0, 0, 90f));
+            GameObject projectile = Instantiate(BulletPrefabs, BulletSpawnPoint.position, Quaternion.Euler(0, 0, 90f));
 
             Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
             projectileRb.velocity = Vector3.right * 10f; // 발사체의 초기 속도를 설정 (오른쪽으로 10의 속도로 발사)

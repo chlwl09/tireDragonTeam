@@ -7,22 +7,23 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 5f; // 몬스터 이동 속도
     public Transform player; // 플레이어의 Transform을 저장하기 위한 변수
     public int health = 3; // 몬스터 생명력
+    public GameObject projectilePrefab; // 발사체 프리팹
+    public Transform projectileSpawnPoint; // 발사체 생성 위치
+    public float fireInterval = 2f; // 발사 간격
+    private float nextFireTime = 0f; // 다음 발사 시간
 
-    float maxMap = 10f;
+    public float maxMap = 10f;
 
     public enum diffEnemy
     {
         LineEnemy,
-        FollowEnemy
+        FollowEnemy,
+        fireEnemy
     }
 
     public diffEnemy currentState;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+  
 
     private void FixedUpdate()
     {
@@ -31,11 +32,21 @@ public class Enemy : MonoBehaviour
 
             // 일직선으로 가는 적
             case diffEnemy.LineEnemy:
-                MoveLeftToRight();
+                MoveRightToLeft();
                 break;
+
             // 플레이어를 따라 가는 적
             case diffEnemy.FollowEnemy:
                 FollowPlayer();
+                break;
+            // 제자리에서 발사만 하는 적
+            case diffEnemy.fireEnemy:
+                if (Time.time > nextFireTime)
+                {
+                    FireProjectile();
+                    nextFireTime = Time.time + fireInterval;
+                }
+               
                 break;
 
         }
@@ -43,7 +54,7 @@ public class Enemy : MonoBehaviour
 
 
 
-    void MoveLeftToRight()
+    void MoveRightToLeft()
     {
         // 몬스터를 오른쪽으로 이동
         transform.Translate(Vector3.left * moveSpeed * Time.fixedDeltaTime);
@@ -65,8 +76,17 @@ public class Enemy : MonoBehaviour
         // 플레이어 방향으로 회전
         Vector2 direction = (player.position - transform.position).normalized;
 
-        // 몬스터를 플레이어 쪽으로 이동
-        transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
+        if(player.transform.position.x > gameObject.transform.position.x) 
+        {
+            MoveRightToLeft();
+        }
+        else
+        {
+            // 몬스터를 플레이어 쪽으로 이동
+            transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
+        }
+
+      
     }
     public void TakeDamage(int damage)
     {
@@ -78,6 +98,33 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
             // 또는 다른 처리를 수행할 수 있습니다.
+        }
+    }
+    void FireProjectile()
+    {
+        // 발사체를 생성하고 왼쪽으로 발사
+        if (projectilePrefab != null && projectileSpawnPoint != null)
+        {
+            GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.Euler(0, 0, 90f));
+            Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+            projectileRb.velocity = new Vector2(-10f, 0f); // 발사체의 초기 속도를 설정 (왼쪽으로 10의 속도로 발사)
+        }
+        else
+        {
+            Debug.LogError("발사체 프리팹 또는 발사체 생성 위치가 설정되지 않았습니다. Inspector에서 설정하세요.");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.TakeDamage(1); // 피해량을 원하는 값으로 설정
+                Destroy(gameObject); // 발사체 파괴
+            }
         }
     }
 }
