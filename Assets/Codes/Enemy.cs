@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float moveSpeed = 5f; // 몬스터 이동 속도
     public Transform player; // 플레이어의 Transform을 저장하기 위한 변수
+    public int health = 3; // 몬스터 생명력
 
     float maxMap = 10f;
 
@@ -20,12 +21,13 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void FixedUpdate()
     {
-        switch(currentState){
+        switch (currentState)
+        {
 
             // 일직선으로 가는 적
             case diffEnemy.LineEnemy:
@@ -39,7 +41,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
- 
+
 
     void MoveLeftToRight()
     {
@@ -66,4 +68,17 @@ public class Enemy : MonoBehaviour
         // 몬스터를 플레이어 쪽으로 이동
         transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
     }
+    public void TakeDamage(int damage)
+    {
+        // 몬스터 생명력 감소
+        health -= damage;
+
+        // 생명력이 0 이하면 몬스터를 파괴하거나 다른 처리 수행
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            // 또는 다른 처리를 수행할 수 있습니다.
+        }
+    }
 }
+
