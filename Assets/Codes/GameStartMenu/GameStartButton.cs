@@ -18,6 +18,6 @@ public class GameStartButton : MonoBehaviour
     }
     public void Change()
     {
-        SceneManager.LoadScene("1");
+        SceneManager.LoadScene("_1");
     }
 }

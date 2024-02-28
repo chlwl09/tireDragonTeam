@@ -23,6 +23,6 @@ public class Life : MonoBehaviour
     void Update()
     {
         // 이후 PlayerHP 변수를 사용할 수 있음
-        healthText.text = player.health.ToString();
+        healthText.text = " HP : " +  player.health.ToString();
     }
 }

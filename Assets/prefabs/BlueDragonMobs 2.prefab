@@ -647,7 +647,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052051794015955261}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.66, y: -0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -754,7 +754,12 @@ MonoBehaviour:
   BulletSpawnPoint: {fileID: 1052051793869119586}
   inputVec: {x: 0, y: 0}
   MoveSpeed: 4
-  health: 100
+  health: 10
+  HPbar: {fileID: 0}
+  canvas: {fileID: 0}
+  hpbarTransform: {fileID: 0}
+  healthSlider: {fileID: 0}
+  Maxhealth: 0
 --- !u!50 &1052051793754499839
 Rigidbody2D:
   serializedVersion: 4

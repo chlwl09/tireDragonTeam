@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  health: 3
+  health: 2
   projectilePrefab: {fileID: 0}
   projectileSpawnPoint: {fileID: 0}
   fireInterval: 2

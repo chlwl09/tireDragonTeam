@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public static Enemy Instance;
+    private AudioManager audioManager; // 오디오 매니저
 
     public float moveSpeed = 5f; // 몬스터 이동 속도
      Transform player; // 플레이어의 Transform을 저장하기 위한 변수
@@ -35,6 +36,11 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager == null)
+        {
+            Debug.LogError("AudioManager not found. Make sure AudioManager script is attached to an object in the scene.");
+        }
     }
     public enum diffEnemy
     {
@@ -150,7 +156,11 @@ public class Enemy : MonoBehaviour
     {
         // 몬스터 생명력 감소
         health -= damage;
-
+        // 맞은 소리 재생
+        if (audioManager != null)
+        {
+            audioManager.PlayEnemyHitSound();
+        }
         // 생명력이 0 이하면 몬스터를 파괴하거나 다른 처리 수행
         if (health <= 0)
         {
@@ -217,6 +227,8 @@ public class Enemy : MonoBehaviour
             MonsterDestroyedEvent(this, m1Score); // 몬스터 인스턴스와 점수를 파라미터로 전달
         }
     }
+
+  
 
     IEnumerator HitAnima(Color color, float duration)
     {

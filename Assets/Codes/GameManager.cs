@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,23 +31,28 @@ public class GameManager : MonoBehaviour
     {
         score = Score.Instance.score;
 
-        if (score < 3000)
+        if (score < 1000)
         {
              randomMonsterIndex = 0;
             spawnInterval = 5;
         }
-        else if (score < 5000)
+        else if (score < 3000)
         {
             randomMonsterIndex = Random.Range(0, 2);
 
-            spawnInterval = 7;
+            spawnInterval = 4;
         }
-        else
+        else if(score < 7000 )
         {
             randomMonsterIndex = Random.Range(0, 3);
-            spawnInterval = 10 ;
+            spawnInterval = 3 ;
         }
-
+        else if (score > 10000)
+        {
+            SceneManager.LoadScene("_2");
+        }
+       
+        
 
 
         // 랜덤으로 몬스터와 위치 선택

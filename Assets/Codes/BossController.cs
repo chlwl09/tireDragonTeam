@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BossController : MonoBehaviour
 {
+    AudioManager audioManager; // 오디오 매니저
+
     public float attackCooldown = 3f; // 각 공격 패턴 간격
     public float movementSpeed = 2f;  // 보스 몹의 움직임 속도
     public float bulletSpeed = 5f;     // 총알 이동 속도
@@ -40,15 +43,10 @@ public class BossController : MonoBehaviour
 
         UpdateHealthUI();
 
-        canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
-
-        if (canvas != null)
+        audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager == null)
         {
-            hpbarTransform = Instantiate(HPbar, canvas.transform).GetComponent<RectTransform>(); // HPBar 위치 저장
-        }
-        else
-        {
-            Debug.LogError("Canvas를 찾을 수 없습니다!");
+            Debug.LogError("AudioManager not found. Make sure AudioManager script is attached to an object in the scene.");
         }
 
         healthSlider = hpbarTransform.GetComponent<Slider>();
@@ -158,6 +156,9 @@ public class BossController : MonoBehaviour
         // 총알의 회전 코루틴 시작
         StartCoroutine(RotateAndShoot(bulletUp, -15f)); // 왼쪽 위로 발사하면서 회전
         StartCoroutine(RotateAndShoot(bulletDown, 15f)); // 왼쪽 아래로 발사하면서 회전
+
+   
+
     }
 
     void AttackPattern3()
@@ -182,18 +183,26 @@ public class BossController : MonoBehaviour
         // 총알의 회전 코루틴 시작
         StartCoroutine(RotateAndShoot(bulletUp, -15f)); // 왼쪽 위로 발사하면서 회전
         StartCoroutine(RotateAndShoot(bulletDown, 15f)); // 왼쪽 아래로 발사하면서 회전
+
+        
     }
 
     // 보스가 데미지를 받는 함수
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        if (audioManager != null)
+        {
+            audioManager.PlayEnemyHitSound();
+        }
+
 
         // 체력이 0 이하로 떨어지면 보스를 처치
         if (currentHealth <= 0)
         {
             currentHealth = 0; // 체력이 음수가 되지 않도록 보정
             UpdateHealthUI();
+            SceneManager.LoadScene("_4");
             Debug.Log("보스 처치!");
             // 여기에서 추가적인 처리를 할 수 있습니다.
         }
