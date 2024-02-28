@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        InvokeRepeating("SpawnRandomMonster", 0f, spawnInterval);
+        InvokeRepeating("SpawnRandomMonster", 0f, spawnInterval);       
     }
     private void Update()
     {

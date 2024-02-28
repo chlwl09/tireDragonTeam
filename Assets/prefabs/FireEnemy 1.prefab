@@ -101,11 +101,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  player: {fileID: 0}
   health: 5
   projectilePrefab: {fileID: 8360190750150356083, guid: 7121f8556e546434094fa04130a48877, type: 3}
   projectileSpawnPoint: {fileID: 3354102505346659462}
   fireInterval: 2
+  m1Score: 50
+  renderer: {fileID: 0}
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  hitDuration: 0.1
   maxMap: 20
   currentState: 2
 --- !u!61 &3523550073144588152

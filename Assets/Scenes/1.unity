@@ -370,7 +370,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &463437010 stripped
 Transform:
@@ -770,6 +770,14 @@ PrefabInstance:
       propertyPath: spawnPoints.Array.data[8]
       value: 
       objectReference: {fileID: 2053745806}
+    - target: {fileID: 2839757755823599815, guid: c186a57aa9f5e05499383ab8a7306510, type: 3}
+      propertyPath: monsterPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3180745842222943406, guid: 7437b3ba0d4440840b5692c06e4fcb81, type: 3}
+    - target: {fileID: 2839757755823599815, guid: c186a57aa9f5e05499383ab8a7306510, type: 3}
+      propertyPath: monsterPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 39548096505255829, guid: a1e8fe2e7325cb540a30c69ed06e7235, type: 3}
     - target: {fileID: 2839757755823599864, guid: c186a57aa9f5e05499383ab8a7306510, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -842,7 +850,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8687284492658652808, guid: b82f7e146a2df9e4f9102a585d43c576, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8687284492658652808, guid: b82f7e146a2df9e4f9102a585d43c576, type: 3}
       propertyPath: m_LocalPosition.x

@@ -13,7 +13,12 @@ public class Enemy : MonoBehaviour
     public Transform projectileSpawnPoint; // 발사체 생성 위치
     public float fireInterval = 2f; // 발사 간격
     public  int m1Score = 50;
-    
+
+    public SpriteRenderer renderer; //SpriteRenderer 사용을 위한 불러옴
+    private Color originalColor;//첫 컬러를 저장하기 위한 변수
+    public Color hitColor = Color.red;//hit 판정 시 나오는 컬러
+    public float hitDuration = 0.1f;//시간 임의
+
     private float nextFireTime = 0f; // 다음 발사 시간
     public float maxMap = 10f;
 
@@ -29,6 +34,12 @@ public class Enemy : MonoBehaviour
     }
 
     public diffEnemy currentState;
+
+    public void Start()
+    {
+        renderer = GetComponent<SpriteRenderer>();//SpriteRenderer 사용을 위해  
+        originalColor = renderer.color; //첫 컬러 저장
+    }
 
     private void Update()
     {
@@ -103,6 +114,8 @@ public class Enemy : MonoBehaviour
         // 몬스터 생명력 감소
         health -= damage;
 
+
+
         // 생명력이 0 이하면 몬스터를 파괴하거나 다른 처리 수행
         if (health <= 0)
         {
@@ -130,6 +143,11 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Invoke("DeadPlayer", 1f);
+
+        if (other.CompareTag("Player"))
+        {
+            StartCoroutine(HitAnima(hitColor, hitDuration));
+        }
     }
     void DeadPlayer(Collider2D other)
     {
@@ -151,6 +169,13 @@ public class Enemy : MonoBehaviour
         {
             MonsterDestroyedEvent(this, m1Score); // 몬스터 인스턴스와 점수를 파라미터로 전달
         }
+    }
+
+    IEnumerator HitAnima(Color color, float duration)
+    {
+        renderer.color = color;
+        yield return new WaitForSeconds(duration);
+        renderer.color = originalColor;
     }
 
     // 몬스터 파괴 이벤트를 수신할 델리게이트 및 이벤트
