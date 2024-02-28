@@ -14,6 +14,13 @@ public class Bullet : MonoBehaviour
                 monster.TakeDamage(1); // 피해량을 원하는 값으로 설정
                 Destroy(gameObject); // 발사체 파괴
             }
+
+            BossController Boss = other.GetComponent<BossController>();
+            if (Boss != null)
+            {
+                Boss.TakeDamage(1);
+                Destroy(gameObject);
+            }
         }
         if (other.CompareTag("Wall"))
         {

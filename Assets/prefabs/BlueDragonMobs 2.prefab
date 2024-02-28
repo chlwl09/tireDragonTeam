@@ -754,7 +754,7 @@ MonoBehaviour:
   BulletSpawnPoint: {fileID: 1052051793869119586}
   inputVec: {x: 0, y: 0}
   MoveSpeed: 4
-  health: 3
+  health: 100
 --- !u!50 &1052051793754499839
 Rigidbody2D:
   serializedVersion: 4
