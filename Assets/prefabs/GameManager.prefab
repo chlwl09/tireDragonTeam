@@ -47,7 +47,7 @@ MonoBehaviour:
   monsterPrefabs:
   - {fileID: 6961919466926103989, guid: eb9961ae08744f1439a624769961d523, type: 3}
   - {fileID: 256258628666526019, guid: f0374ccd5ab22474b9f8d85377b3f61b, type: 3}
-  - {fileID: 3951323445001362172, guid: 712019a66262e274ba03511655dd460c, type: 3}
+  - {fileID: 6711577664819568009, guid: a5bd014e9a1ab0b458fbb87b9a6e6ccd, type: 3}
   spawnPoints:
   - {fileID: 5759059762010075902, guid: 370a5b47c648d7947a9e95933c3fc667, type: 3}
   - {fileID: 8631877061579970590, guid: a1a46ba1eeb56ee4bb38673b428309a2, type: 3}

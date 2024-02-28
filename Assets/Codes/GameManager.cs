@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         else
         {
             randomMonsterIndex = Random.Range(0, 3);
-            spawnInterval = 10;
+            spawnInterval = 10 ;
         }
 
 
