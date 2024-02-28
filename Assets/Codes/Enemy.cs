@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -22,6 +23,15 @@ public class Enemy : MonoBehaviour
     private float nextFireTime = 0f; // 다음 발사 시간
     public float maxMap = 10f;
 
+    //몬스터 HPUI 구현
+    public GameObject HPbar;
+    public Canvas canvas;
+    public RectTransform hpbarTransform;
+    public float height = -1f;
+
+    public Slider healthSlider; //UI의 HP 수치 건드는 
+    public int Maxhealth;//몬스터가 생성되자마자의 HP를 저장하는 함수
+    
 
     private void Awake()
     {
@@ -39,14 +49,38 @@ public class Enemy : MonoBehaviour
     {
         renderer = GetComponent<SpriteRenderer>();//SpriteRenderer 사용을 위해  
         originalColor = renderer.color; //첫 컬러 저장
+
+        Maxhealth = health;
+
+
+
+        UpdateHealthUI();
+
+        canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+
+        if (canvas != null)
+        {
+            hpbarTransform = Instantiate(HPbar, canvas.transform).GetComponent<RectTransform>(); // HPBar 위치 저장
+        }
+        else
+        {
+            Debug.LogError("Canvas를 찾을 수 없습니다!");
+        }
+
+        healthSlider = hpbarTransform.GetComponent<Slider>();
     }
 
     private void Update()
     {
+        Vector3 hpbarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + height, 0));
+        hpbarTransform.position = hpbarPos;
+
     }
 
     private void FixedUpdate()
     {
+
+        UpdateHealthUI();
         switch (currentState)
         {
 
@@ -114,14 +148,16 @@ public class Enemy : MonoBehaviour
         // 몬스터 생명력 감소
         health -= damage;
 
-
-
         // 생명력이 0 이하면 몬스터를 파괴하거나 다른 처리 수행
         if (health <= 0)
         {
             OnMonsterDestroyed();
             Destroy(gameObject);
-            
+            if (hpbarTransform != null)
+            {
+                Destroy(hpbarTransform.gameObject);
+            }
+
             // 또는 다른 처리를 수행할 수 있습니다.
         }
     }
@@ -147,6 +183,12 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             StartCoroutine(HitAnima(hitColor, hitDuration));
+
+            // HP바를 제거합니다.
+            if (hpbarTransform != null)
+            {
+                Destroy(hpbarTransform.gameObject);
+            }
         }
     }
     void DeadPlayer(Collider2D other)
@@ -159,7 +201,8 @@ public class Enemy : MonoBehaviour
             {
                 player.TakeDamage(1); // 피해량을 원하는 값으로 설정
                 Destroy(gameObject);
-            }
+                
+            }            
         }
     }
     void OnMonsterDestroyed()
@@ -176,6 +219,22 @@ public class Enemy : MonoBehaviour
         renderer.color = color;
         yield return new WaitForSeconds(duration);
         renderer.color = originalColor;
+    }
+        
+    private void UpdateHealthUI()
+    {
+        if (healthSlider != null)
+        {
+            if (Maxhealth > 0)
+            {
+                healthSlider.normalizedValue= (float)health / (float)Maxhealth; // 현재 체력을 Slider 값으로 설정
+                Debug.Log("HP 줄어듦");
+            }
+            else
+            {
+                Debug.LogError("Maxhealth는 0보다 커야 합니다.");
+            }
+        }
     }
 
     // 몬스터 파괴 이벤트를 수신할 델리게이트 및 이벤트
