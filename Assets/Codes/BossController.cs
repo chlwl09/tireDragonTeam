@@ -66,7 +66,7 @@ public class BossController : MonoBehaviour
 
     void AttackPattern1()
     {
-        Debug.Log("일직선으로 총알 공격 실행");
+        Debug.Log("일직선으로 총알 공격 실행");    
 
         // 총알 발사 위치
         Vector3 spawnPosition = bulletSpawnPoint.position;
