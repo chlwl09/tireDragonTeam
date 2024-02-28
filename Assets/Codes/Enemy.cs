@@ -72,9 +72,12 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        Vector3 hpbarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + height, 0));
-        hpbarTransform.position = hpbarPos;
-
+        if (hpbarTransform != null)
+        {
+            Vector3 hpbarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + height, 0));
+            hpbarTransform.position = hpbarPos;
+        }
+       
     }
 
     private void FixedUpdate()
@@ -166,7 +169,8 @@ public class Enemy : MonoBehaviour
         // 발사체를 생성하고 왼쪽으로 발사
         if (projectilePrefab != null && projectileSpawnPoint != null)
         {
-            GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.Euler(0, 0, 90f));
+            Vector3 updateVec = projectileSpawnPoint.position + new Vector3(-1, 0, 0);
+            GameObject projectile = Instantiate(projectilePrefab, updateVec , Quaternion.Euler(0, 0, 0));
             Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
             projectileRb.velocity = new Vector2(-10f, 0f); // 발사체의 초기 속도를 설정 (왼쪽으로 10의 속도로 발사)
         }

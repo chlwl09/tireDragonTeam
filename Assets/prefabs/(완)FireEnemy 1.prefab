@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6711577664819568009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.75, y: -5.7, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3354102505346659462}
@@ -113,7 +113,7 @@ MonoBehaviour:
   HPbar: {fileID: 8792494794444874977, guid: 125e2d12ae2b906489853c00ee1d8195, type: 3}
   canvas: {fileID: 1838000777937262105, guid: 73fe1ae823855c9499b922ec7ded12ea, type: 3}
   hpbarTransform: {fileID: 9012642291613386598, guid: 125e2d12ae2b906489853c00ee1d8195, type: 3}
-  height: 1
+  height: -1
   healthSlider: {fileID: 8702747971742739823, guid: 125e2d12ae2b906489853c00ee1d8195, type: 3}
   Maxhealth: 0
   currentState: 2
@@ -127,7 +127,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

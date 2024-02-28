@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossController : MonoBehaviour
 {
@@ -22,19 +23,43 @@ public class BossController : MonoBehaviour
     public Transform bulletSpawnPointUp; // 총알 발사 위치
     public Transform bulletSpawnPointDown; // 총알 발사 위치
 
+    //BossHPUI
+    public GameObject HPbar;
+    public Canvas canvas;
+    public RectTransform hpbarTransform;
+
+    public Slider healthSlider; //UI의 HP 수치 건드는 
+
+
+
     void Start()
     {
         currentHealth = maxHealth; // 시작 시 현재 체력을 최대 체력으로 초기화
         // 코루틴 시작
         StartCoroutine(BossAttackCoroutine());
+
+        UpdateHealthUI();
+
+        canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
+
+        if (canvas != null)
+        {
+            hpbarTransform = Instantiate(HPbar, canvas.transform).GetComponent<RectTransform>(); // HPBar 위치 저장
+        }
+        else
+        {
+            Debug.LogError("Canvas를 찾을 수 없습니다!");
+        }
+
+        healthSlider = hpbarTransform.GetComponent<Slider>();
     }
 
     private void Update()
     {
         float newY = Mathf.PingPong(Time.time * movementSpeed, maxY - minY) + minY;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        UpdateHealthUI();
     }
-
 
     IEnumerator BossAttackCoroutine()
     {
@@ -168,12 +193,30 @@ public class BossController : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0; // 체력이 음수가 되지 않도록 보정
+            UpdateHealthUI();
             Debug.Log("보스 처치!");
             // 여기에서 추가적인 처리를 할 수 있습니다.
         }
         else
         {
             Debug.Log("보스 현재 체력: " + currentHealth);
+        }
+    }
+
+    //보스 HP UI
+    private void UpdateHealthUI()
+    {
+        if (healthSlider != null)
+        {
+            if (maxHealth > 0)
+            {
+                healthSlider.normalizedValue = (float)currentHealth / (float)maxHealth; // 현재 체력을 Slider 값으로 설정
+                Debug.Log("HP 줄어듦");
+            }
+            else
+            {
+                Debug.LogError("Maxhealth는 0보다 커야 합니다.");
+            }
         }
     }
 }
