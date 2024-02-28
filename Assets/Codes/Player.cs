@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     {  // 발사체를 생성하고 오른쪽으로 발사
         if (BulletPrefabs != null && BulletSpawnPoint != null)
         {
-            GameObject projectile = Instantiate(BulletPrefabs, BulletSpawnPoint.position, Quaternion.Euler(0, 0, 90f));
+            GameObject projectile = Instantiate(BulletPrefabs, BulletSpawnPoint.position, Quaternion.identity);
 
             Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
             projectileRb.velocity = Vector3.right * 10f; // 발사체의 초기 속도를 설정 (오른쪽으로 10의 속도로 발사)
