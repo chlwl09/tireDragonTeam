@@ -5,6 +5,6 @@
 
 <div>프로그래밍 : 이윤택, 최지훈</div>
 <div>기획 : 정민규</div>
-<div>디자인 : 박도은</div>
+<div>그래픽 : 박도은</div>
 <div>제작기간 : '24. 2. 17 ~ '24. 2. 18</div>
 http://m.gachonnews.com/news/articleView.html?idxno=6135
